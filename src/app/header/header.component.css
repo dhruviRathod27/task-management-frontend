@@ -1,0 +1,15 @@
+.spacer {
+    flex: 1 1 auto;
+  }
+  
+  .cart-badge {
+    background-color: #ff4081;
+    border-radius: 50%;
+    color: white;
+    padding: 2px 8px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 12px;
+  }
+  

@@ -1,0 +1,18 @@
+<mat-toolbar color="primary">
+    <!-- <button mat-icon-button routerLink="['/product']">
+        <mat-icon>home</mat-icon>
+      </button> -->
+    <span>My Task</span>
+    <span class="spacer"></span>
+    <!-- <button mat-icon-button (click)="goToOrder()">
+      <mat-icon>shopping_cart</mat-icon>
+      <span class="cart-badge" *ngIf="totalItems > 0">{{ totalItems }}</span>
+    </button> -->
+    <button mat-icon-button [routerLink]="['/login']">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      <button mat-icon-button (click)="logout()">
+        <mat-icon>logout</mat-icon>
+      </button>
+  </mat-toolbar>
+  
