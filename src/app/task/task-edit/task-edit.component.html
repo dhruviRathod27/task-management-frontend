@@ -1,4 +1,5 @@
-<form [formGroup]="editTaskForm" (ngSubmit)="onSubmit()">
+<div class="main-container">
+  <form [formGroup]="editTaskForm" (ngSubmit)="onSubmit()">
     <mat-form-field appearance="fill">
       <mat-label>Task Name</mat-label>
       <input matInput formControlName="title" required>
@@ -35,6 +36,6 @@
       </mat-form-field>
     <!-- <mat-checkbox formControlName="status">Completed</mat-checkbox> -->
   
-    <button mat-raised-button color="primary" type="submit">Create Task</button>
+    <button mat-raised-button color="primary" type="submit">Edit Task</button>
   </form>
-  
+</div>  
