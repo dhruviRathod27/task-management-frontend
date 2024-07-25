@@ -25,7 +25,7 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    if(localStorage){
+    if(this.isLocalStorageAvailable()){
         const token = localStorage.getItem(this.tokenKey);
         return !this.jwtHelper.isTokenExpired(token);
     }
@@ -33,7 +33,7 @@ export class AuthService {
   }
   loggedInUserId(){
     let userId='';
-    if(localStorage){
+    if(this.isLocalStorageAvailable()){
       const token = localStorage.getItem(this.tokenKey);
       const data= this.jwtHelper.decodeToken(token || '');
       if(data && data.userId){
@@ -41,5 +41,15 @@ export class AuthService {
       }
   }
   return userId;
+  }
+  private isLocalStorageAvailable(): boolean {
+    try {
+      const test = '__localStorage_test__';
+      localStorage.setItem(test, test);
+      localStorage.removeItem(test);
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 }

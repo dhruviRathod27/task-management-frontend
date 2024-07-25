@@ -32,6 +32,6 @@ export class RegisterComponent {
     if (this.username != '' && this.password != '') {
       return true;
     }
-    return true;
+    return false;
   }
 }
