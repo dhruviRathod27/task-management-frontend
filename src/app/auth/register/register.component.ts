@@ -12,16 +12,26 @@ export class RegisterComponent {
   username: string = '';
   password: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) { }
 
   register() {
     this.authService.register(this.username, this.password)
-      .subscribe((result: any) => {
-        if(result && result.data){
+      .subscribe({
+        next :(result: any) => {
+        if (result && result.data) {
           Notify.success(result.message);
           console.log('User registered successfully');
           this.router.navigate(['/login']);
         }
-      });
+      }, 
+      error : error => {
+        Notify.failure(error.message);
+      }});
+  }
+  enableRegisterBtn() {
+    if (this.username != '' && this.password != '') {
+      return true;
+    }
+    return true;
   }
 }

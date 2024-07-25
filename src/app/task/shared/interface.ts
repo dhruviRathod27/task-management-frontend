@@ -1,11 +1,12 @@
 
 export interface ITask {
-    id?:any,
-    title: string;
+  id?: any,
+  title: string;
   description: string;
   dueDate: string;
   priority: string;
   status: string;
+  userId?: string;
 }
 export interface NetworkResponse<Collection> {
   statusCode: number,
@@ -18,7 +19,7 @@ export interface ExtraData {
   page: number;
   total: number;
 }
-export interface Pagination{
+export interface Pagination {
   page: number,
   perPage: number,
   total?: number

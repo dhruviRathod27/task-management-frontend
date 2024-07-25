@@ -25,24 +25,27 @@ export class TaskEditComponent {
   }
   ngOnInit(): void {
     const taskId = this.route.snapshot.params['id'];
-    console.log(taskId)
-    this.taskService.getTaskById(taskId).subscribe((result : any)=>{
-      console.log(result);
+    this.taskService.getTaskById(taskId).subscribe({
+      next : (result : any)=>{
       this.task=result.data[0];
       if (this.task) {
         this.editTaskForm.patchValue(this.task);
       }
+    },
+    error: error=> Notify.failure(error.message)
     });
   }
   onSubmit() {
     if (this.editTaskForm.valid && this.task) {
       const updatedTask = { ...this.task, ...this.editTaskForm.value };
-      this.taskService.updateTask(updatedTask).subscribe(result=>{
-        console.log(result);
+      this.taskService.updateTask(updatedTask).subscribe({
+        next : result=>{
         if(result && result.data){
           Notify.success(result.message);
         }
-      });
+      },
+      error : error=>Notify.failure(error.message)
+    });
       this.router.navigate(['/tasks']);
     }
   }

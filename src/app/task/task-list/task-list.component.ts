@@ -14,17 +14,18 @@ export class TaskListComponent {
   filteredTasks: ITask[] = [];
   statusFilter = new FormControl('');
   priorityFilter = new FormControl('');
-  displayedColumns: string[]=['title','description','dueDate','priority','status','actions'];
+  displayedColumns: string[] = ['title', 'description', 'dueDate', 'priority', 'status', 'actions'];
 
-  constructor(private taskService: TaskService, private router : Router) {}
+  constructor(private taskService: TaskService, private router: Router) { }
 
   ngOnInit() {
-    this.taskService.getTasks().subscribe(result => {
+    this.taskService.getTasks().subscribe({
+      next: result => {
 
-      this.tasks = result.data;
-      console.log("task list")
-      console.log(this.tasks);
-      this.filteredTasks = result.data;
+        this.tasks = result.data;
+        this.filteredTasks = result.data;
+      },
+      error: error => Notify.failure(error.message)
     });
     this.statusFilter.valueChanges.subscribe(() => this.filterTasks());
     this.priorityFilter.valueChanges.subscribe(() => this.filterTasks());
@@ -33,10 +34,9 @@ export class TaskListComponent {
     this.router.navigate(['/task', task.id]);
   }
   deleteTask(id: any) {
-    this.taskService.deleteTask(id).subscribe(result=>{
-      console.log(result);
+    this.taskService.deleteTask(id).subscribe(result => {
       window.location.reload();
-      if(result && result.data){
+      if (result && result.data) {
         Notify.success(result.message);
       }
     });

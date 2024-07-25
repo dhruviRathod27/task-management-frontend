@@ -9,7 +9,7 @@
         <label for="password">Password</label>
         <input type="password" id="password" [(ngModel)]="password" name="password" required>
       </div>
-      <button type="submit">Register</button>
+      <button [disabled] = "!enableRegisterBtn()" type="submit">Register</button>
     </form>
     <button mat-button  [routerLink]="['/login']">login</button>
   </div>

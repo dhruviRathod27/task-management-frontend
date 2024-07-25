@@ -26,13 +26,15 @@ export class TaskCreateComponent implements OnInit {
 
   onSubmit() {
     if (this.createTaskForm.valid) {
-      console.log('Form Value', this.createTaskForm.value);
-      this.taskService.addTask(this.createTaskForm.value).subscribe(result=>{
-        console.log(result);
+      this.taskService.addTask(this.createTaskForm.value).subscribe({
+        next :result=>{
         if(result && result.data){
           Notify.success(result.message)
         }
-      });
+      },
+    error: error=>{
+      Notify.failure(error.message);
+    }});
       this.createTaskForm.reset();
       this.router.navigate([`/tasks`])
       
